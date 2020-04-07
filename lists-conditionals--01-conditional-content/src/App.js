@@ -1,16 +1,20 @@
 // * NOTE : Arrow functions work well for properties because they use 'this' of thier parent
+// * Understand Virtual DOM Better
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import { Validation } from './util/validation/Validation';
+import Char from './util/Char/char';
 
 class App extends Component {
   state = {
     persons: [
-      { name: 'Max', age: 28 },
-      { name: 'Manu', age: 29 },
-      { name: 'Stephanie', age: 26 }
+      { name: 'Max', age: 28, id: 'AW' },
+      { name: 'Manu', age: 29, id: 'AWW' },
+      { name: 'Stephanie', age: 26, id: 'AWWW' }
     ],
-    otherState: 'some other value',
+    userInputLength: 0,
+    userInput: '',
     showPersons: false
   }
 
@@ -26,14 +30,26 @@ class App extends Component {
     })
   }
 
-  nameChangedHandler = (event) => {
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex((person) => {
+      return person.id === id
+    }
+    )
+
+    // make copy of the person to be modified
+    const person = { ...this.state.persons[personIndex] }
+
+    // Get name from user input
+    person.name = event.target.value
+
+    const personsModified = [...this.state.persons];
+    personsModified[personIndex] = person
+
     this.setState({
-      persons: [
-        { name: 'Max', age: 28 },
-        { name: event.target.value, age: 29 },
-        { name: 'Stephanie', age: 26 }
-      ]
+      persons: personsModified
     })
+
+
   }
 
   togglePersonsHandler = () => {
@@ -48,9 +64,39 @@ class App extends Component {
     this.setState({ persons: persons })
   }
 
+  // Task 1: Take length of input and place it in p
+  inputFieldHandler = (event) => {
+
+    const userInput = event.target.value;
+
+    this.setState({
+      userInput: userInput,
+      userInputLength: userInput.length
+    })
+
+  }
+
+  deleteCharHandler = (charIndex) => {
+    // ? copy array, so we don't modify state until we assign new state
+
+    let userInputChars = this.state.userInput.split('')
+
+    // Remove specified char from array
+    userInputChars.splice(charIndex, 1)
+
+    // Join back into string
+    userInputChars = userInputChars.join('')
+
+    this.setState({
+      userInput: userInputChars,
+      userInputLength: userInputChars.length
+    })
+
+  }
 
   // Excecuted on every rerender
   render() {
+
     const style = {
       backgroundColor: 'teal',
       font: 'inherit',
@@ -66,19 +112,46 @@ class App extends Component {
 
         return <div>
           <Person
+            key={person.id}
             name={person.name}
             age={person.age}
-            click={() => this.deletePersonHandler(index)} />
+            click={() => this.deletePersonHandler(index)}
+            changed={(event) => this.nameChangedHandler(event, person.id)} />
         </div>
 
       }));
     }
 
+    let chars = null;
+    let uniuqueId = 0
+
+
+    if (this.state.userInput) {
+      chars = (this.state.userInput.split('').map((character, index) => {
+
+        return <Char key={uniuqueId++} char={character} click={() => { this.deleteCharHandler(index) }} />
+
+      }));
+    }
+
+
     return (
       <div className="App">
 
         <h1>List of Records</h1>
-        <p>This is really working!</p>
+
+
+        <input
+          type="text"
+          onChange={(event) => this.inputFieldHandler(event)}
+          value={this.state.userInput}
+        />
+
+        <p>{this.state.userInput}</p>
+        <Validation textLength={this.state.userInputLength} />
+
+        {chars}
+
         <button
           style={style}
           onClick={this.togglePersonsHandler}>Toggle Persons</button>
@@ -92,3 +165,6 @@ class App extends Component {
 }
 
 export default App;
+
+
+// Before taxes yearly earning : $8,267
