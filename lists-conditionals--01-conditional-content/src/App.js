@@ -1,6 +1,8 @@
-// * NOTE : Arrow functions work well for properties because they use 'this' of thier parent
 // * Understand Virtual DOM Better
+// * NOTE : Arrow functions work well for properties because they use 'this' of thier parent
 import React, { Component } from 'react';
+
+import Radium from 'radium'
 import './App.css';
 import Person from './Person/Person';
 import { Validation } from './util/validation/Validation';
@@ -102,7 +104,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid green',
       padding: '10px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightblue',
+        color: 'black'
+      }
     };
 
     let persons = null;
@@ -111,6 +117,12 @@ class App extends Component {
 
       //? Dynamic Styling
       style.backgroundColor = 'blue'
+
+      // ? property accessed like this because it is a string
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
 
       persons = (this.state.persons.map((person, index) => {
 
@@ -143,9 +155,9 @@ class App extends Component {
 
     // ? Dynamically add class names
     const classes = [];
-    if (this.state.persons.length <=2) {
+    if (this.state.persons.length <= 2) {
       classes.push('blue')
-    } 
+    }
     if (this.state.persons.length <= 1) {
       classes.push('bold')
     }
@@ -156,7 +168,7 @@ class App extends Component {
       <div className="App">
 
         <h1>List of Records</h1>
-        <p className= {assignedClasses}>This is Built with React</p>
+        <p className={assignedClasses}>This is Built with React</p>
 
         <input
           type="text"
@@ -181,6 +193,7 @@ class App extends Component {
   }
 }
 
-export default App;
+// ?Radium is a higher order component (Adds Extra functionality by )
+export default Radium(App);
 
 
