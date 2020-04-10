@@ -108,6 +108,10 @@ class App extends Component {
     let persons = null;
 
     if (this.state.showPersons) {
+
+      //? Dynamic Styling
+      style.backgroundColor = 'blue'
+
       persons = (this.state.persons.map((person, index) => {
 
         return <div>
@@ -115,11 +119,14 @@ class App extends Component {
             key={person.id}
             name={person.name}
             age={person.age}
+            // ? TODO NOTE this is passing an anonymous function, not an excection of a function 
             click={() => this.deletePersonHandler(index)}
             changed={(event) => this.nameChangedHandler(event, person.id)} />
         </div>
 
       }));
+
+
     }
 
     let chars = null;
@@ -139,7 +146,7 @@ class App extends Component {
       <div className="App">
 
         <h1>List of Records</h1>
-
+        <h2>This is Built with React</h2>
 
         <input
           type="text"
@@ -167,4 +174,3 @@ class App extends Component {
 export default App;
 
 
-// Before taxes yearly earning : $8,267
