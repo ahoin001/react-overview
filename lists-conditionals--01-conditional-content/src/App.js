@@ -2,7 +2,8 @@
 // * NOTE : Arrow functions work well for properties because they use 'this' of thier parent
 import React, { Component } from 'react';
 
-import Radium from 'radium'
+import Radium, { StyleRoot } from 'radium'
+
 import './App.css';
 import Person from './Person/Person';
 import { Validation } from './util/validation/Validation';
@@ -165,29 +166,36 @@ class App extends Component {
     let assignedClasses = classes.join(' ')
 
     return (
-      <div className="App">
 
-        <h1>List of Records</h1>
-        <p className={assignedClasses}>This is Built with React</p>
+      // ?Wrapper required for media queries and animation frames for Radium
+      <StyleRoot>
 
-        <input
-          type="text"
-          onChange={(event) => this.inputFieldHandler(event)}
-          value={this.state.userInput}
-        />
+        <div className="App">
 
-        <p>{this.state.userInput}</p>
-        <Validation textLength={this.state.userInputLength} />
+          <h1>List of Records</h1>
+          <p className={assignedClasses}>This is Built with React</p>
 
-        {chars}
+          <input
+            type="text"
+            onChange={(event) => this.inputFieldHandler(event)}
+            value={this.state.userInput}
+          />
 
-        <button
-          style={style}
-          onClick={this.togglePersonsHandler}>Toggle Persons</button>
+          <p>{this.state.userInput}</p>
+          <Validation textLength={this.state.userInputLength} />
 
-        {persons}
+          {chars}
 
-      </div>
+          <button
+            style={style}
+            onClick={this.togglePersonsHandler}>Toggle Persons</button>
+
+          {persons}
+
+        </div>
+
+      </StyleRoot>
+
     );
 
   }
