@@ -1,13 +1,12 @@
 // * Understand Virtual DOM Better
 // * NOTE : Arrow functions work well for properties because they use 'this' of thier parent
 import React, { Component } from 'react';
+import styled from 'styled-components';
 
 // import Radium, { StyleRoot } from 'radium'
 
 import './App.css';
 import Person from './Person/Person';
-import { Validation } from './util/validation/Validation';
-import Char from './util/Char/char';
 
 class App extends Component {
   state = {
@@ -97,33 +96,36 @@ class App extends Component {
 
   }
 
+ 
+
   // Excecuted on every rerender
   render() {
 
-    const style = {
-      backgroundColor: 'teal',
-      font: 'inherit',
-      border: '1px solid green',
-      padding: '10px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightblue',
+    // ? Use Styled Components 
+    const StyledButton = styled.button` 
+      /* Pass props to styled component for use in dynamic styling */
+      background-color: ${props => props.alternate ? 'red' : 'green'};
+      color: white;
+      font: inherit;
+      border: 1px solid green;
+      padding: 10px;
+      cursor: pointer;
+      
+      /* '&' is required to let SC know hover belongs to this component */
+      &:hover {
+        background-color: ${props => props.alternate ? 'salmon' : 'lightgreen'};
         color: 'black'
-      }
-    };
+      }`;
 
     let persons = null;
 
     if (this.state.showPersons) {
 
-      //? Dynamic Styling
-      style.backgroundColor = 'blue'
-
       // ? property accessed like this because it is a string
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
+      // style[':hover'] = {
+      //   backgroundColor: 'salmon',
+      //   color: 'black'
+      // }
 
       persons = (this.state.persons.map((person, index) => {
 
@@ -142,18 +144,6 @@ class App extends Component {
 
     }
 
-    let chars = null;
-    let uniuqueId = 0
-
-
-    if (this.state.userInput) {
-      chars = (this.state.userInput.split('').map((character, index) => {
-
-        return <Char key={uniuqueId++} char={character} click={() => { this.deleteCharHandler(index) }} />
-
-      }));
-    }
-
     // ? Dynamically add class names
     const classes = [];
     if (this.state.persons.length <= 2) {
@@ -165,36 +155,35 @@ class App extends Component {
 
     let assignedClasses = classes.join(' ')
 
+    
+      
     return (
 
       // ?Wrapper required for media queries and animation frames for
-      // <StyleRoot>
 
-        <div className="App">
+      <div className="App">
 
-          <h1>List of Records</h1>
-          <p className={assignedClasses}>This is Built with React</p>
+        <h1>List of Records</h1>
+        <p className={assignedClasses}>This is Built with React</p>
 
-          <input
-            type="text"
-            onChange={(event) => this.inputFieldHandler(event)}
-            value={this.state.userInput}
-          />
+        {/* <input
+          type="text"
+          onChange={(event) => this.inputFieldHandler(event)}
+          value={this.state.userInput}
+        /> */}
 
-          <p>{this.state.userInput}</p>
-          <Validation textLength={this.state.userInputLength} />
+        <StyledButton 
+        alternate= {this.state.showPersons}
+        onClick={this.togglePersonsHandler}
+        >
 
-          {chars}
+          Toggle Persons
+          
+        </StyledButton>
+          
+        {persons}
 
-          <button
-            style={style}
-            onClick={this.togglePersonsHandler}>Toggle Persons</button>
-
-          {persons}
-
-        </div>
-
-      // {/* </StyleRoot> */} 
+      </div>
 
     );
 
