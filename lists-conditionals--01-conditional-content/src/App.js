@@ -2,7 +2,7 @@
 // * NOTE : Arrow functions work well for properties because they use 'this' of thier parent
 import React, { Component } from 'react';
 
-import Radium, { StyleRoot } from 'radium'
+// import Radium, { StyleRoot } from 'radium'
 
 import './App.css';
 import Person from './Person/Person';
@@ -167,8 +167,8 @@ class App extends Component {
 
     return (
 
-      // ?Wrapper required for media queries and animation frames for Radium
-      <StyleRoot>
+      // ?Wrapper required for media queries and animation frames for
+      // <StyleRoot>
 
         <div className="App">
 
@@ -194,7 +194,7 @@ class App extends Component {
 
         </div>
 
-      </StyleRoot>
+      // {/* </StyleRoot> */} 
 
     );
 
@@ -202,6 +202,7 @@ class App extends Component {
 }
 
 // ?Radium is a higher order component (Adds Extra functionality by )
-export default Radium(App);
+export default App;
+// export default Radium(App);
 
 
