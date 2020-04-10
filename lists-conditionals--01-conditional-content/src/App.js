@@ -141,12 +141,22 @@ class App extends Component {
       }));
     }
 
+    // ? Dynamically add class names
+    const classes = [];
+    if (this.state.persons.length <=2) {
+      classes.push('blue')
+    } 
+    if (this.state.persons.length <= 1) {
+      classes.push('bold')
+    }
+
+    let assignedClasses = classes.join(' ')
 
     return (
       <div className="App">
 
         <h1>List of Records</h1>
-        <h2>This is Built with React</h2>
+        <p className= {assignedClasses}>This is Built with React</p>
 
         <input
           type="text"
