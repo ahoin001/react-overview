@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import * as Styled from './AppStyles';
 
 import PersonList from '../components/Persons/PersonList';
+import Cockpit from '../components/cockpit/Cockpit'
 
 class App extends Component {
   state = {
@@ -56,41 +57,24 @@ class App extends Component {
 
     if (this.state.showPersons) {
 
-      personList = 
-      <PersonList
-        persons={this.state.persons}
-        deletePersonHandler={this.deletePersonHandler}
-        nameChangedHandler={this.nameChangedHandler}
-      />
+      personList =
+        <PersonList
+          persons={this.state.persons}
+          deletePersonHandler={this.deletePersonHandler}
+          nameChangedHandler={this.nameChangedHandler}
+        />
 
     }
-
-    // ? Dynamically add class names 
-    const classes = [];
-    if (this.state.persons.length <= 2) {
-      classes.push('blue')
-    }
-    if (this.state.persons.length <= 1) {
-      classes.push('bold')
-    }
-
-    let assignedClasses = classes.join(' ')
 
     return (
 
       <Styled.AppContainer>
 
-        <h1>List of Records</h1>
-        <p className={assignedClasses}>This is Built with React</p>
-
-        <Styled.AppContainerButton
-          alternate={this.state.showPersons}
-          onClick={this.togglePersonsHandler}
-        >
-
-          Toggle Persons
-
-        </Styled.AppContainerButton>
+        <Cockpit
+          persons={this.state.persons}
+          showingPersons={this.state.showPersons}
+          togglePersons={this.togglePersonsHandler}
+        />
 
         {personList}
 
