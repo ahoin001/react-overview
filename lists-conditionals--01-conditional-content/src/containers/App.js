@@ -1,29 +1,12 @@
+// * 
+// * Understand diffferent ways of styling components
 // * Understand Virtual DOM Better
 // * NOTE : Arrow functions work well for properties because they use 'this' of thier parent
+
 import React, { Component } from 'react';
-import styled from 'styled-components';
-import './App.css';
+import * as Styled from './AppStyles';
 
 import PersonList from '../components/Persons/PersonList';
-
-// ? Use Styled Components 
-// ! STYLED COMPONENT MUST BE MADE OUTSIDE OF COMPONENT TO PREVENT 
-// ! STRANGE BEHAVIORS SUCH AS INPUT CHANGES ETC
-
-const StyledButton = styled.button` 
-      /* Pass props to styled component for use in dynamic styling */
-      background-color: ${props => props.alternate ? 'red' : 'green'};
-      color: white;
-      font: inherit;
-      border: 1px solid green;
-      padding: 10px;
-      cursor: pointer;
-      
-      /* '&' is required to let SC know hover belongs to this component */
-      &:hover {
-        background-color: ${props => props.alternate ? 'salmon' : 'lightgreen'};
-        color: 'black'
-      }`;
 
 class App extends Component {
   state = {
@@ -82,7 +65,7 @@ class App extends Component {
 
     }
 
-    // ? Dynamically add class names
+    // ? Dynamically add class names 
     const classes = [];
     if (this.state.persons.length <= 2) {
       classes.push('blue')
@@ -95,23 +78,23 @@ class App extends Component {
 
     return (
 
-      <div className="App">
+      <Styled.AppContainer>
 
         <h1>List of Records</h1>
         <p className={assignedClasses}>This is Built with React</p>
 
-        <StyledButton
+        <Styled.AppContainerButton
           alternate={this.state.showPersons}
           onClick={this.togglePersonsHandler}
         >
 
           Toggle Persons
 
-        </StyledButton>
+        </Styled.AppContainerButton>
 
         {personList}
 
-      </div>
+      </Styled.AppContainer>
 
     );
 

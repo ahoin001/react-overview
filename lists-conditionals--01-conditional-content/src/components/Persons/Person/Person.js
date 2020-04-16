@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Styled from './styled'
+import * as Styled from './PersonStyles'
 
 // ? Approach with styled components from external file
 const person = (props) => {
