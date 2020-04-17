@@ -1,4 +1,4 @@
-// * 
+// * Have as few stateful components as possible, Folder structure, 
 // * Understand diffferent ways of styling components
 // * Understand Virtual DOM Better
 // * NOTE : Arrow functions work well for properties because they use 'this' of thier parent
@@ -10,6 +10,15 @@ import PersonList from '../components/Persons/PersonList';
 import Cockpit from '../components/cockpit/Cockpit'
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    console.log(`[App.js] constructor`)
+
+  }
+  
+
+  // ?State can be initialized like this and create constructor behind the scenes
   state = {
     persons: [
       { name: 'Alex', age: 28, id: 'AW' },
@@ -19,6 +28,13 @@ class App extends Component {
     userInputLength: 0,
     userInput: '',
     showPersons: false
+  }
+
+  static getDerivedState(props,state) {
+    
+    console.log(`[App.js] getDerivedStateFromProps`, props)
+
+    return state
   }
 
   nameChangedHandler = (event, id) => {
@@ -53,6 +69,7 @@ class App extends Component {
   // ? Excecuted on every rerender
   render() {
 
+    console.log(`[App.js] render`)
     let personList = null;
 
     if (this.state.showPersons) {
