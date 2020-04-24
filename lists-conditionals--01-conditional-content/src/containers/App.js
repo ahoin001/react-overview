@@ -27,7 +27,8 @@ class App extends Component {
     ],
     userInputLength: 0,
     userInput: '',
-    showPersons: false
+    showPersons: false,
+    showCockpit: true
   }
 
   static getDerivedStateFromProps(props,state) {
@@ -97,11 +98,18 @@ class App extends Component {
 
       <Styled.AppContainer>
 
-        <Cockpit
+        <button
+        onClick={() => {
+          this.setState({showCockpit:false})
+        }}>
+          Remove Cockpit
+        </button>
+
+        {this.state.showCockpit ? <Cockpit
           persons={this.state.persons}
           showingPersons={this.state.showPersons}
           togglePersons={this.togglePersonsHandler}
-        />
+        /> : null}
 
         {personList}
 

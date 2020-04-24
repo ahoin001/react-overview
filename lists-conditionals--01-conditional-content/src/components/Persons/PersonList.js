@@ -1,31 +1,50 @@
 import React from 'react'
 import Person from './Person/Person'
 
-const PersonList = (props) => {
 
-    let personsList = props.persons.map((person, index) => {
+class PersonList extends React.Component {
 
-        // console.log(person)
+    constructor(props) {
+      super(props);
+      console.log(`[Personlist.js] constructor`)
+  
+    }
 
-        return <Person
-            key={person.id}
-            name={person.name}
-            age={person.age}
-            // ? NOTE this is passing an anonymous function, not an excection of a function 
-            // ? Can check react ocs for other ways to pass parameters and instances
-            click={() => props.deletePersonHandler(index)}
-            changed={(event) => props.nameChangedHandler(event, person.id)}
-        />
 
-    })
+    componentWillUnmount(){
+        console.log(`[PersonList.js] will unmount`)
+    }
 
-    return (
-        <div>
+    render() {
 
-            {personsList}
+        let personsList = this.props.persons.map((person, index) => {
 
-        </div>
-    )
+            // console.log(person)
+    
+            return <Person
+                key={person.id}
+                name={person.name}
+                age={person.age}
+                // ? NOTE this is passing an anonymous function, not an excection of a function 
+                // ? Can check react ocs for other ways to pass parameters and instances
+                click={() => this.props.deletePersonHandler(index)}
+                changed={(event) => this.props.nameChangedHandler(event, person.id)}
+            />
+    
+        })
+    
+        return (
+            <div>
+    
+                {personsList}
+    
+            </div>
+        )
+
+
+
+    }
 }
+
 
 export default PersonList
