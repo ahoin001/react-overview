@@ -5,7 +5,7 @@ const PersonList = (props) => {
 
     let personsList = props.persons.map((person, index) => {
 
-        console.log(person)
+        // console.log(person)
 
         return <Person
             key={person.id}

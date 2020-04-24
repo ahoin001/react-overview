@@ -3,16 +3,17 @@ import * as Styled from './PersonStyles'
 
 // ? Approach with styled components from external file
 const person = (props) => {
+    console.log(`[Person.js] rendering`)
 
     return (
     
-        <Styled.personContainer>
+        <Styled.PersonContainer>
 
             <p onClick={props.click}>I'm {props.name} and I am {props.age} years old!</p>
             <p>{props.children}</p>
             <input type="text" onChange={props.changed} value={props.name} />
 
-        </Styled.personContainer>
+        </Styled.PersonContainer>
 
     )
 };
