@@ -5,14 +5,48 @@ import Person from './Person/Person'
 class PersonList extends React.Component {
 
     constructor(props) {
-      super(props);
-      console.log(`[Personlist.js] constructor`)
-  
+        super(props);
+        console.log(`[Personlist.js] constructor`)
+
     }
 
 
-    componentWillUnmount(){
-        console.log(`[PersonList.js] will unmount`)
+    // static getDerivedStateFromProps(props, state) {
+    //   console.log('[Persons.js] getDerivedStateFromProps');
+    //   return state;
+    // }
+
+    // componentWillReceiveProps(props) {
+    //   console.log('[Persons.js] componentWillReceiveProps', props);
+    // }
+
+    // ? Used to tell component only to update if props are changed on rerender
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('[Personlist.js] shouldComponentUpdate');
+        if (nextProps.persons !== this.props.persons) {
+            return true
+        } else {
+            return false
+        }
+        // return true;
+    }
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        console.log('[Personlist.js] getSnapshotBeforeUpdate');
+        return { message: 'Snapshot!' };
+    }
+
+    // componentWillUpdate() {
+
+    // }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('[Personlist.js] componentDidUpdate');
+        console.log(snapshot);
+    }
+
+    componentWillUnmount() {
+        console.log('[Personlist.js] componentWillUnmount');
     }
 
     render() {
@@ -20,7 +54,7 @@ class PersonList extends React.Component {
         let personsList = this.props.persons.map((person, index) => {
 
             // console.log(person)
-    
+
             return <Person
                 key={person.id}
                 name={person.name}
@@ -30,14 +64,14 @@ class PersonList extends React.Component {
                 click={() => this.props.deletePersonHandler(index)}
                 changed={(event) => this.props.nameChangedHandler(event, person.id)}
             />
-    
+
         })
-    
+
         return (
             <div>
-    
+
                 {personsList}
-    
+
             </div>
         )
 

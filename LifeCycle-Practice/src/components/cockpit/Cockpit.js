@@ -12,7 +12,7 @@ const Cockpit = props => {
 
        const timer = setTimeout(() => {
             alert('Change made to persons list')
-        }, 2000);
+        }, 1000);
 
         // ? This runs when component is unmounted
         return () => {
@@ -22,7 +22,6 @@ const Cockpit = props => {
 
         }
         
-
     }, 
     // [props.persons]
     )
@@ -37,7 +36,9 @@ const Cockpit = props => {
         }
         
 
-    }, [props.persons])
+    }, 
+    // [props.persons]
+    )
     
     // ? Empty array makes it onnly run the first time component mounts
     // useEffect(() => {
@@ -54,10 +55,10 @@ const Cockpit = props => {
 
         <React.Fragment>
 
-            <h1>List of Records</h1>
+            <h1>{props.title}</h1>
 
             <Styled.ListSubtitle 
-            listlength = {props.persons.length}
+            listlength = {props.personsLength}
             > 
             
             This is Built with React 
@@ -82,4 +83,5 @@ Cockpit.propTypes = {
     persons: PropTypes.array
 }
 
-export default Cockpit
+// ? React stores snapchat of component, and only rerenders when state or props are changed, otherwise it returns the previous render of component
+export default React.memo(Cockpit)

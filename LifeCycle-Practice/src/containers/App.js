@@ -31,22 +31,27 @@ class App extends Component {
     showCockpit: true
   }
 
-  static getDerivedStateFromProps(props,state) {
-    
-    console.log(`[App.js] getDerivedStateFromProps`, props)
-
-    return state
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
   }
 
+  // componentWillMount() {
+  //   console.log('[App.js] componentWillMount');
+  // }
 
   componentDidMount() {
-    console.log(`[App.js] componentDidMount`)
+    console.log('[App.js] componentDidMount');
   }
 
-  // deprecated
-  // componentWillMount() {
-  //   console.log(`[App.js] componentWillMount`)
-  // }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[App.js] shouldComponentUpdate');
+    return true;
+  }
+
+  componentDidUpdate() {
+    console.log('[App.js] componentDidUpdate');
+  }
 
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
@@ -106,7 +111,8 @@ class App extends Component {
         </button>
 
         {this.state.showCockpit ? <Cockpit
-          persons={this.state.persons}
+          title={'List of People'}
+          personsLength={this.state.persons.length}
           showingPersons={this.state.showPersons}
           togglePersons={this.togglePersonsHandler}
         /> : null}
