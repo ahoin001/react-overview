@@ -8,6 +8,7 @@ import * as Styled from './AppStyles';
 
 import PersonList from '../components/Persons/PersonList';
 import Cockpit from '../components/cockpit/Cockpit'
+import WithClass from '../hoc/WithClass';
 
 class App extends Component {
 
@@ -16,7 +17,7 @@ class App extends Component {
     console.log(`[App.js] constructor`)
 
   }
-  
+
 
   // ?State can be initialized like this and create constructor behind the scenes
   state = {
@@ -101,25 +102,30 @@ class App extends Component {
 
     return (
 
-      <Styled.AppContainer>
+      <WithClass someAddedLogic={() => console.log('Rendering app component in HOC *****')}>
 
-        <button
-        onClick={() => {
-          this.setState({showCockpit:false})
-        }}>
-          Remove Cockpit
+        <Styled.AppContainer>
+
+          <button
+            onClick={() => {
+              this.setState({ showCockpit: false })
+            }}>
+            Remove Cockpit
         </button>
 
-        {this.state.showCockpit ? <Cockpit
-          title={'List of People'}
-          personsLength={this.state.persons.length}
-          showingPersons={this.state.showPersons}
-          togglePersons={this.togglePersonsHandler}
-        /> : null}
+          {this.state.showCockpit ? <Cockpit
+            title={'List of People'}
+            personsLength={this.state.persons.length}
+            showingPersons={this.state.showPersons}
+            togglePersons={this.togglePersonsHandler}
+          /> : null}
 
-        {personList}
+          {personList}
 
-      </Styled.AppContainer>
+        </Styled.AppContainer>
+
+      </WithClass>
+
 
     );
 
