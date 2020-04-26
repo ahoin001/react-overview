@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types'; 
+
+
 import * as Styled from './PersonStyles'
 
 // import Aux from '../../../hoc/Aux'
@@ -30,6 +33,15 @@ export default withClass(person,'green-text', () => {
 }
 );
 
+person.propTypes = {
+
+    click : PropTypes.func,
+    changed : PropTypes.func,
+    name : PropTypes.string,
+    age : PropTypes.number,
+    value : PropTypes.string,
+
+}
 
 // ? Approach with styled components in same file
 
