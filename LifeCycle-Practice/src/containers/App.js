@@ -8,7 +8,10 @@ import * as Styled from './AppStyles';
 
 import PersonList from '../components/Persons/PersonList';
 import Cockpit from '../components/cockpit/Cockpit'
-import WithClass from '../hoc/WithClass';
+import Aux from '../hoc/Aux';
+import withClass from '../hoc/withClass';
+
+import './App.css'
 
 class App extends Component {
 
@@ -102,7 +105,11 @@ class App extends Component {
 
     return (
 
-      <WithClass someAddedLogic={() => console.log('Rendering app component in HOC *****')}>
+      // ? Aux is HOC that returns adjacent JSX elements and some styling
+      <Aux
+        className={'bold-text'}
+        someAddedLogic={() => console.log('Returning Render of App component in Aux HOC *****')}
+      >
 
         <Styled.AppContainer>
 
@@ -124,7 +131,7 @@ class App extends Component {
 
         </Styled.AppContainer>
 
-      </WithClass>
+      </Aux>
 
 
     );
@@ -132,5 +139,9 @@ class App extends Component {
   }
 }
 
-export default App;
+// ! NOTE This way of using HOC is typically for adding logic to a component, styling and html should be added in 
+// ! way of Aux HOC above 
+
+// ? withClass is a HOC that takes a component and places it in a container with a provided style
+export default withClass(App, 'blue-text',() => console.log('Wrapping App component in withClass HOC *****'));
 
