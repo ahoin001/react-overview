@@ -1,19 +1,26 @@
 import React from 'react';
 import * as Styled from './PersonStyles'
 
+import Aux from '../../../hoc/Aux'
+
 // ? Approach with styled components from external file
 const person = (props) => {
     console.log(`[Person.js] rendering`)
 
     return (
-    
-        <Styled.PersonContainer>
 
-            <p onClick={props.click}>I'm {props.name} and I am {props.age} years old!</p>
-            <p>{props.children}</p>
-            <input type="text" onChange={props.changed} value={props.name} />
+        <Aux>
 
-        </Styled.PersonContainer>
+            <Styled.PersonContainer>
+
+                <p onClick={props.click}>I'm {props.name} and I am {props.age} years old!</p>
+                <p>{props.children}</p>
+                <input type="text" onChange={props.changed} value={props.name} />
+
+            </Styled.PersonContainer>
+
+        </Aux>
+
 
     )
 };
@@ -36,7 +43,7 @@ export default person;
     //    box-shadow: 0 2px 3px #ccc;
     //    padding: 16px;
     //    text-align: center;
-    
+
     //    @media (min-width: 500px) {
     //      width: 450px;  
     //  }
@@ -45,20 +52,20 @@ export default person;
     // const person = (props) => {
 
     //     return (
-        
+
     //         <StyledDiv>
-    
+
     //             <p onClick={props.click}>I'm {props.name} and I am {props.age} years old!</p>
     //             <p>{props.children}</p>
     //             <input type="text" onChange={props.changed} value={props.name} />
-    
+
     //         </StyledDiv>
-    
+
     //     )
     // };
-    
+
     // export default person;
 
 
-    
+
 

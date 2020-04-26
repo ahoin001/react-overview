@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {PureComponent} from 'react'
 import Person from './Person/Person'
 
 
-class PersonList extends React.Component {
+class PersonList extends PureComponent {
 
     constructor(props) {
         super(props);
@@ -21,15 +21,20 @@ class PersonList extends React.Component {
     // }
 
     // ? Used to tell component only to update if props are changed on rerender
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log('[Personlist.js] shouldComponentUpdate');
-        if (nextProps.persons !== this.props.persons) {
-            return true
-        } else {
-            return false
-        }
-        // return true;
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+
+    //     console.log('[Personlist.js] shouldComponentUpdate');
+    //     if (
+    //         nextProps.persons !== this.props.persons ||
+    //         nextProps.changed !== this.props.changed ||
+    //         nextProps.clicked !== this.props.clicked
+    //     ) {
+    //         return true
+    //     } else {
+    //         return false
+    //     }
+        
+    // }
 
     getSnapshotBeforeUpdate(prevProps, prevState) {
         console.log('[Personlist.js] getSnapshotBeforeUpdate');
