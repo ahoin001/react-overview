@@ -1,7 +1,10 @@
 import React from 'react';
 import * as Styled from './PersonStyles'
 
-import Aux from '../../../hoc/Aux'
+// import Aux from '../../../hoc/Aux'
+import withClass from '../../../hoc/withClass'
+
+import './Person.css'
 
 // ? Approach with styled components from external file
 const person = (props) => {
@@ -9,8 +12,7 @@ const person = (props) => {
 
     return (
 
-        <Aux>
-
+            
             <Styled.PersonContainer>
 
                 <p onClick={props.click}>I'm {props.name} and I am {props.age} years old!</p>
@@ -19,13 +21,14 @@ const person = (props) => {
 
             </Styled.PersonContainer>
 
-        </Aux>
-
-
+    
     )
 };
 
-export default person;
+export default withClass(person,'green-text', () => {
+    console.log('I wrapped person component in a div with green text class, and logged this line');
+}
+);
 
 
 // ? Approach with styled components in same file

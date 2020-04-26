@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react'
 import Person from './Person/Person'
 
 
+// ? Pure Component has shouldComponentUpdate built in
 class PersonList extends PureComponent {
 
     constructor(props) {
