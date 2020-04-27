@@ -1,28 +1,35 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useRef} from 'react'
 import PropTypes from 'prop-types'
 import * as Styled from './CockpitStyles'
 
 const Cockpit = props => {
 
+   const toggleRefBttn = useRef(null)
+    
+    
     // ? Can Handle all update lifecycle methods from Class Components
-    // ? Runs when component is created or when dependancy is changed (replaces didMount, didUpdate , willunmount(if ))
+    // ? Runs when component is created(After Render Cycle, when jsx is rendered) 
+    // ? And when dependancy is changed (replaces didMount, didUpdate , willunmount(if ))
+    // ? Second argument specifies when it should run
     useEffect(() => {
        
         console.log(`[Cockpit.js] useEffect`)
 
-       const timer = setTimeout(() => {
-            alert('Change made to persons list')
-        }, 1000);
+    //    const timer = setTimeout(() => {
+    //         alert('Change made to persons list')
+    //     }, 1000);
+
+        toggleRefBttn.current.click()
 
         // ? This runs when component is unmounted
         return () => {
 
-            clearTimeout(timer)
+            // clearTimeout(timer)
             console.log(`[Cockpit.js] cleanup work....  unmounting`)    
 
         }
         
-    }, 
+    }, []
     // [props.persons]
     )
 
@@ -66,6 +73,7 @@ const Cockpit = props => {
             </Styled.ListSubtitle> 
 
             <Styled.AppContainerButton
+                ref={toggleRefBttn}
                 alternate={props.showingPersons}
                 onClick={props.togglePersons}
             >
